@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <style>
+        .list-enter-active, .list-leave-active {
+            transition: all 1s;
+        }
+        .list-enter, .list-leave-to
+        /* .list-leave-active for below version 2.1.8 */ 
+        {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    </style>
+</head>
+<body>
+<div id="todoList">
+    <input type="text" v-model="inputValue">
+    <input type="button" value="提交" @click="handleBtnClick">
+    <input type="button" value="添加更多" @click="addSome">
+    <ul>
+        <!-- 在todoItem里面，我们通过v-for迭代出来的item和index是属于父组件里面的 -->
+        <!-- 所以我们需要把这两个值传给子组件，在子组件中通过props属性来取得 -->
+        <transition-group name="list">
+        <todo-item
+            :content="item"
+            v-for="(item,index) in list"
+            :key="item"
+            @delete="handleItemDelete(index)">
+            <span style="color:blueviolet;">任务内容：</span>
+        </todo-item>
+        </transition-group>
+    </ul>
+    
+</div>
+<script src="../axios.min.js"></script>
+<script src="../vue.js"></script>
+<script>
+    Vue.component('todoItem',{
+        props:['content'],
+        template:`
+                <li>
+                    <slot></slot>
+                    {{content}}
+                    <input type="button" value="删除" @click="deleteItem">
+                </li>
+                `,
+        data:function(){
+            return{
+                show:true
+            }
+        },
+        methods:{
+            deleteItem:function () {
+                this.$emit("delete");
+            }
+        }
+    })
+
+    let todoList = new Vue({
+        el:'#todoList',
+        data:{
+            list:['今天放学后树林打架','今天回家洗碗','睡觉前刷剧'],
+            inputValue:'',
+        },
+        methods:{
+            addSome:function () {
+                axios.get('http://yapi.demo.qunar.com/mock/68871/getTodoList',{params:{Num:3}})
+                    .then(function(res){
+                        console.log(res.data);
+                        let list = res.data.todoList;
+                        for (let i=0 ; i<list.length;i++ ){
+                        todoList.$data.list.push(list[i]);
+                        }
+                    }).catch(function(res){
+                    console.log(res);
+                });
+            },
+            handleBtnClick:function () {
+                this.list.push(todoList.$data.inputValue);/*todoList.$data.list.push(todoList.$data.inputValue);*/
+                console.log(this);
+                this.inputValue='';
+            },
+            handleItemDelete:function (index) {
+                this.list.splice(index, 1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
