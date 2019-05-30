@@ -19,53 +19,19 @@
 <script>
 export default{
   name: 'HomeIcon',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
-      },
-      iconList: [{
-        id: '0001',
-        imgUrl: 'https://dummyimage.com/100x100/739bde/fff',
-        desc: '景点门票'
-      }, {
-        id: '0002',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '滑雪季'
-      }, {
-        id: '0003',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '泡温泉'
-      }, {
-        id: '0004',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '动植物园'
-      }, {
-        id: '0005',
-        imgUrl: 'https://dummyimage.com/100x100/739bde/fff',
-        desc: '景点门票'
-      }, {
-        id: '0006',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '滑雪季'
-      }, {
-        id: '0007',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '泡温泉'
-      }, {
-        id: '0008',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '动植物园'
-      }, {
-        id: '0009',
-        imgUrl: 'https://dummyimage.com/100x100/73d6de/fff',
-        desc: '动植物园'
-      }]
+      }
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []

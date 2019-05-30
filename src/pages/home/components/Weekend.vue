@@ -2,7 +2,7 @@
   <div>
       <div class="recommend-title">周末去哪儿</div>
       <ul>
-          <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+          <li class="item border-bottom" v-for="item of list" :key="item.id">
             <div class="item-img-wrapper">
               <img class="item-img" :src="item.imgUrl">
             </div>
@@ -18,35 +18,8 @@
 <script>
 export default{
   name: 'HomeWeekend',
-  data () {
-    return {
-      recommendList: [{
-        id: '0001',
-        imgUrl: 'https://dummyimage.com/640x214/64fff6/fff',
-        title: '北京-泰国 7天自由行',
-        desc: '519大促！泰国普吉岛「芭东区海边酒店」机酒+赠专车接送机+保险+赠流量卡'
-      }, {
-        id: '0002',
-        imgUrl: 'https://dummyimage.com/640x214/64fff6/fff',
-        title: '北京-泰国 7天自由行',
-        desc: '519大促！泰国普吉岛「芭东区海边酒店」机酒+赠专车接送机+保险+赠流量卡'
-      }, {
-        id: '0003',
-        imgUrl: 'https://dummyimage.com/640x214/64fff6/fff',
-        title: '北京-泰国 7天自由行',
-        desc: '519大促！泰国普吉岛「芭东区海边酒店」机酒+赠专车接送机+保险+赠流量卡'
-      }, {
-        id: '0004',
-        imgUrl: 'https://dummyimage.com/640x214/64fff6/fff',
-        title: '北京-泰国 7天自由行',
-        desc: '519大促！泰国普吉岛「芭东区海边酒店」机酒+赠专车接送机+保险+赠流量卡'
-      }, {
-        id: '0005',
-        imgUrl: 'https://dummyimage.com/640x214/64fff6/fff',
-        title: '北京-泰国 7天自由行',
-        desc: '519大促！泰国普吉岛「芭东区海边酒店」机酒+赠专车接送机+保险+赠流量卡'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>
@@ -61,7 +34,7 @@ export default{
   .item-img-wrapper
     overflow: hidden
     height: 0
-    padding-bottom: 33.9%
+    padding-bottom: 37.09%
     .item-img
       width: 100%
   .item-info
