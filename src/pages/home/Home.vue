@@ -26,6 +26,7 @@ export default{
   },
   data () {
     return {
+      lastCity: '',
       swiperList: [],
       iconList: [],
       recommendList: [],
@@ -49,7 +50,15 @@ export default{
     }
   },
   mounted () {
+    console.log(this.city)
+    this.lastCity = this.city
     this.gerHomeInfo()
+  },
+  activated () {
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo
+    }
   }
 }
 </script>
