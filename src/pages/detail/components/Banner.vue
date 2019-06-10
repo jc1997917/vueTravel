@@ -25,10 +25,10 @@ import CommonGallary from '@/common/gallary/Gallary'
 export default {
   name: 'DetailBanner',
   data () {
-    return{
+    return {
       showGallary: false,
       imgs: ['https://dummyimage.com/1000x550/ecc/fff',
-      'https://dummyimage.com/1000x550/ecc/fff']
+        'https://dummyimage.com/1000x550/ec5/fff']
     }
   },
   methods: {
